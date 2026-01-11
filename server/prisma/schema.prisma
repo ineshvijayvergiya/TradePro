@@ -1,0 +1,53 @@
+// server/prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String     @id @default(uuid())
+  email     String     @unique
+  name      String?
+  balance   Float      @default(100000) // Paper Money (Default 1 Lakh)
+  createdAt DateTime   @default(now())
+
+  // Game Relations
+  trades    Trade[]
+  portfolio Position[]
+  
+  // Agar Watchlist pehle se thi to uncomment kar lena
+  // watchlists Watchlist[]
+}
+
+// 1. Trade History (Passbook - Kab kya kharida/becha)
+// Humne controller me 'Trade' use kiya hai, isliye Transaction hata diya duplicate na ho
+model Trade {
+  id        String   @id @default(uuid())
+  userId    String
+  symbol    String   // e.g., "RELIANCE"
+  quantity  Int
+  price     Float    // Execution Price
+  side      String   // "BUY" or "SELL"
+  timestamp DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+// 2. Current Holdings (Portfolio - Abhi jeb me kya hai)
+// Humne controller me 'Position' use kiya hai, isliye Holding hata diya
+model Position {
+  id        String   @id @default(uuid())
+  userId    String
+  symbol    String   // e.g., "TCS"
+  quantity  Int      // Net shares held
+  avgPrice  Float    // Average Buy Price
+
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@unique([userId, symbol]) // Unique constraint: Ek user ek stock ki ek hi position rakhega
+}

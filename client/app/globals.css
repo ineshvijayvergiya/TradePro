@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light Theme (Default) */
+  --bg: 249 250 251;       /* #f9fafb */
+  --card: 255 255 255;     /* #ffffff */
+  --text: 17 24 39;        /* #111827 */
+  --text-muted: 107 114 128;
+  --primary: 37 99 235;    /* #2563eb (Blue) */
+  --secondary: 20 184 166; /* #14b8a6 (Teal) */
+  --accent: 245 158 11;    /* #f59e0b (Amber) */
+  --border: 229 231 235;
+}
+
+[data-theme="dark"] {
+  /* Dark Theme */
+  --bg: 11 15 20;          /* #0b0f14 */
+  --card: 17 24 39;        /* #111827 */
+  --text: 249 250 251;     /* #f9fafb */
+  --text-muted: 156 163 175;
+  --primary: 34 197 94;    /* #22c55e (Green) */
+  --secondary: 20 184 166; /* #14b8a6 */
+  --accent: 245 158 11;    /* #f59e0b */
+  --border: 31 41 55;
+}
+
+body {
+  background-color: rgb(var(--bg));
+  color: rgb(var(--text));
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.5);
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.8);
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}

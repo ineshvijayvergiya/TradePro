@@ -1,0 +1,36 @@
+/* App.css - Copy Paste This */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* --- LIGHT MODE (Default) --- */
+  :root {
+    /* Format: R G B (No commas, no brackets) */
+    --bg: 245 247 250;      /* #f5f7fa (Light Grey Back) */
+    --card: 255 255 255;    /* #ffffff (White Card) */
+    --text: 30 35 41;       /* #1e2329 (Dark Text) */
+    --text-muted: 112 122 138;
+    --primary: 37 99 235;   /* Blue */
+    --border: 229 231 235;  /* Light Border */
+  }
+
+  /* --- DARK MODE (Jab .dark class lagegi) --- */
+  .dark {
+    --bg: 11 15 20;         /* #0b0f14 (Deep Dark Back) */
+    --card: 22 27 34;       /* #161b22 (Dark Sidebar/Card) */
+    --text: 234 236 239;    /* #eaecef (White Text) */
+    --text-muted: 132 142 156;
+    --primary: 34 197 94;   /* Green (Trade style) */
+    --border: 43 49 57;     /* Dark Border */
+  }
+}
+
+/* Base setup to apply the colors */
+body {
+  /* Yaha hum Tailwind variables use kar rahe hain */
+  background-color: rgb(var(--bg));
+  color: rgb(var(--text));
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
